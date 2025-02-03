@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffffff; /* Todo el fondo será blanco */
+            background-color: #f4f4f4;
         }
         .header {
             background-color: #00055A;
@@ -33,7 +33,6 @@
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
-            background-color: white; /* Eliminado cualquier otro color de fondo */
         }
         button {
             width: 100%;
@@ -45,7 +44,7 @@
             cursor: pointer;
         }
         button:hover {
-            background-color: #000478;
+            background-color: #00055A  ;
         }
         .footer {
             text-align: center;
@@ -64,7 +63,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            background-color: #ffffff; /* Fondo blanco en toda la pantalla */
+            background-color: #ffffff;
         }
         .error {
             color: red;
@@ -84,21 +83,26 @@
                 width: 90%;
             }
         }
+
         .certificado-contenedor {
-            width: 60%;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #ffffff; /* Se mantiene blanco */
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        .certificado-texto {
-            text-align: justify;
-            font-size: 16px;
-            line-height: 1.6;
-            color: #333;
-        }
+    width: 60%; /* Ajusta el ancho del contenedor */
+    margin: 20px auto; /* Centrar horizontalmente */
+    padding: 20px;
+    background-color: #f9f9f9; /* Color de fondo suave */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    text-align: center; /* Centrar el contenido */
+}
+
+.certificado-texto {
+    text-align: justify; /* Justifica el texto */
+    font-size: 16px; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    color: #333; /* Color del texto */
+}
+
+
+
     </style>
 </head>
 <body>
@@ -125,6 +129,10 @@
         const certificados = {
             "1": { correlativo: "1", nombre: "Johan Zela Sanchez", certificado: "Taller de fortalecimiento de Capacidades 2025" },
             "87654321": { correlativo: "002", nombre: "María López", certificado: "Curso de Redes" }
+
+
+
+
         };
 
         function verificarCertificado() {
@@ -137,25 +145,29 @@
             const errorMensaje = document.getElementById("errorMensaje");
             const success = document.querySelector(".success");
             
-            if (certificados[dni] && certificados[dni].correlativo === correlativo) {
-                nombreCertificado.innerHTML = `<strong>${certificados[dni].nombre}</strong>`;
-                
-                detalleCertificado.classList.add("certificado-contenedor");
-                detalleCertificado.innerHTML = `
-                    <p class="certificado-texto">
-                        "El Instituto de Educación Superior Pedagógico Privado Amauta" certifica que 
-                        <strong>${certificados[dni].nombre}</strong>, identificado con N° DNI 
-                        <strong>${dni}</strong>, ha completado y aprobado exitosamente el curso 
-                        <strong>${certificados[dni].certificado}</strong>.
-                    </p>`;
+            // Verifica si el certificado existe y coincide con el correlativo
+if (certificados[dni] && certificados[dni].correlativo === correlativo) {
+    nombreCertificado.innerHTML = `<strong>${certificados[dni].nombre}</strong>`;
 
-                verificacion.style.display = "none";
-                dashboard.style.display = "flex";
-                success.style.display = "block";
-                errorMensaje.style.display = "none";
-            } else {
-                errorMensaje.style.display = "block";
-            }
+    // Agrega una clase para aplicar estilos
+    detalleCertificado.classList.add("certificado-contenedor");
+    detalleCertificado.innerHTML = `
+        <p class="certificado-texto">
+            "El Instituto de Educación Superior Pedagógico Privado Amauta" certifica que 
+            <strong>${certificados[dni].nombre}</strong>, identificado con N° DNI 
+            <strong>${dni}</strong>, ha completado y aprobado exitosamente el curso 
+            <strong>${certificados[dni].certificado}</strong>.
+        </p>`;
+
+    // Mostrar el dashboard y ocultar la verificación
+    verificacion.style.display = "none";
+    dashboard.style.display = "flex";
+    success.style.display = "block";
+    errorMensaje.style.display = "none";
+} else {
+    errorMensaje.style.display = "block";
+}
+
         }
     </script>
 </body>
